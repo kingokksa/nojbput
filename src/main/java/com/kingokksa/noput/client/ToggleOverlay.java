@@ -14,8 +14,7 @@ import org.lwjgl.glfw.GLFW;
 
 @Mod.EventBusSubscriber(modid = "nojbput", value = Dist.CLIENT)
 public class ToggleOverlay {
-    private static final ResourceLocation ICON =
-            new ResourceLocation("nojbput", "textures/gui/switch.png");
+    private static final ResourceLocation ICON = new ResourceLocation("nojbput", "textures/gui/switch.png");
 
     private static final int SIZE = 4;
     private static final int TEXTURE_SIZE = 8;
@@ -27,15 +26,18 @@ public class ToggleOverlay {
 
     @SubscribeEvent
     public static void onRender(ScreenEvent.Render.Post event) {
-        if (!(event.getScreen() instanceof InventoryScreen)) return;
+        if (!(event.getScreen() instanceof InventoryScreen invScreen) || Minecraft.getInstance().screen == null
+                || invScreen.getRecipeBookComponent().isVisible())
+            return;
 
         Minecraft mc = Minecraft.getInstance();
         GuiGraphics guiGraphics = event.getGuiGraphics();
 
-        int guiLeft = (mc.getWindow().getGuiScaledWidth() - INVENTORY_WIDTH) / 2;
+        int guiLeft = (mc.getWindow().getGuiScaledWidth()
+                - (invScreen.getRecipeBookComponent().isVisible() ? INVENTORY_WIDTH * 2 : INVENTORY_WIDTH)) / 2;
         int guiTop = (mc.getWindow().getGuiScaledHeight() - INVENTORY_HEIGHT) / 2;
 
-        int switchX = guiLeft + OFFHAND_SLOT_X + 16 - SIZE +4;
+        int switchX = guiLeft + OFFHAND_SLOT_X + 16 - SIZE + 4;
         int switchY = guiTop + OFFHAND_SLOT_Y - SIZE;
 
         RenderSystem.setShaderTexture(0, ICON);
@@ -49,14 +51,18 @@ public class ToggleOverlay {
 
     @SubscribeEvent
     public static void onMouseClick(ScreenEvent.MouseButtonPressed.Pre event) {
-        if (!(event.getScreen() instanceof InventoryScreen)) return;
-        if (event.getButton() != GLFW.GLFW_MOUSE_BUTTON_LEFT) return;
+        if (!(event.getScreen() instanceof InventoryScreen invScreen) || Minecraft.getInstance().screen == null
+                || invScreen.getRecipeBookComponent().isVisible())
+            return;
+        if (event.getButton() != GLFW.GLFW_MOUSE_BUTTON_LEFT)
+            return;
 
         Minecraft mc = Minecraft.getInstance();
 
-        int guiLeft = (mc.getWindow().getGuiScaledWidth() - INVENTORY_WIDTH) / 2;
+        int guiLeft = (mc.getWindow().getGuiScaledWidth()
+                - (invScreen.getRecipeBookComponent().isVisible() ? INVENTORY_WIDTH * 2 : INVENTORY_WIDTH)) / 2;
         int guiTop = (mc.getWindow().getGuiScaledHeight() - INVENTORY_HEIGHT) / 2;
-        int switchX = guiLeft + OFFHAND_SLOT_X + 16 - SIZE +4;
+        int switchX = guiLeft + OFFHAND_SLOT_X + 16 - SIZE + 4;
         int switchY = guiTop + OFFHAND_SLOT_Y - SIZE;
 
         if (event.getMouseX() >= switchX &&
