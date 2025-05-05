@@ -8,17 +8,40 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
+
+import java.util.Optional;
 
 @Mod("nojbput")
 public class NoJbPut {
+    private static final String PROTOCOL_VERSION = "1";
+    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
+            new ResourceLocation("nojbput", "toggle_sync"),
+            () -> PROTOCOL_VERSION,
+            PROTOCOL_VERSION::equals,
+            PROTOCOL_VERSION::equals);
+
+    static {
+        CHANNEL.registerMessage(
+                0,
+                ToggleSyncMessage.class,
+                ToggleSyncMessage::encode,
+                ToggleSyncMessage::decode,
+                ToggleSyncMessage::handle);
+    }
+
     public NoJbPut() {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (!ToggleHandler.isEnabled()) return;
+        if (!ToggleHandler.isEnabled())
+            return;
 
         Player player = event.getEntity();
         if (event.getHand() == InteractionHand.OFF_HAND &&

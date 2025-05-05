@@ -30,4 +30,13 @@ public class ToggleHandler {
     public static boolean isEnabled() {
         return enabled;
     }
+
+    public static void setEnabled(boolean enabled) {
+        ToggleHandler.enabled = enabled;
+        try {
+            Files.writeString(CONFIG_PATH, Boolean.toString(enabled));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

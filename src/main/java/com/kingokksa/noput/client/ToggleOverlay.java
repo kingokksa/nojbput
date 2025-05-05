@@ -11,6 +11,8 @@ import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
+import com.kingokksa.noput.NoJbPut;
+import com.kingokksa.noput.ToggleSyncMessage;
 
 @Mod.EventBusSubscriber(modid = "nojbput", value = Dist.CLIENT)
 public class ToggleOverlay {
@@ -71,6 +73,7 @@ public class ToggleOverlay {
                 event.getMouseY() <= switchY + SIZE) {
 
             ToggleHandler.toggle();
+            NoJbPut.CHANNEL.sendToServer(new ToggleSyncMessage(ToggleHandler.isEnabled()));
             event.setCanceled(true);
             event.setResult(net.minecraftforge.eventbus.api.Event.Result.DENY);
         }
