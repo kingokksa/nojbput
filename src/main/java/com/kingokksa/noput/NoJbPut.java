@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.kingokksa.noput.util.ToggleHandler;
 import com.kingokksa.noput.client.ToggleOverlay;
+import com.kingokksa.noput.client.KeyInputHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,6 +32,7 @@ public class NoJbPut {
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(NoJbPut::registerPayloads);
         ToggleOverlay.register();
+        // KeyInputHandler会通过@EventBusSubscriber自动注册，无需手动注册
     }
 
     public static void registerPayloads(final RegisterPayloadHandlersEvent event) {

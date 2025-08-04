@@ -3,9 +3,11 @@ package com.kingokksa.noput.client;
 import com.kingokksa.noput.NoJbPut;
 import com.kingokksa.noput.util.ToggleHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
@@ -58,6 +60,17 @@ public class ToggleOverlay {
         if (mouseX >= btnX && mouseX <= btnX + BUTTON_WIDTH && mouseY >= btnY && mouseY <= btnY + BUTTON_HEIGHT) {
             ToggleHandler.toggle();
             NoJbPut.sendToggleSync(ToggleHandler.isEnabled());
+            
+            // 在屏幕上显示消息
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.player != null) {
+                String status = ToggleHandler.isEnabled() ? "开" : "关";
+                mc.player.displayClientMessage(
+                    Component.literal("副手放置: " + status), 
+                    true
+                );
+            }
+            
             event.setCanceled(true);
         }
     }
