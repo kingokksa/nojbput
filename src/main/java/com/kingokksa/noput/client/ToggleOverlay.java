@@ -30,7 +30,8 @@ public class ToggleOverlay {
     @SubscribeEvent
     public static void onScreenRender(ScreenEvent.Render.Post event) {
         Screen screen = event.getScreen();
-        if (!(screen instanceof InventoryScreen invScreen)) return;
+        if (!(screen instanceof InventoryScreen invScreen))
+            return;
 
         int btnX = invScreen.getGuiLeft() + OFFHAND_SLOT_X + 16;
         int btnY = invScreen.getGuiTop() + OFFHAND_SLOT_Y - 5;
@@ -49,8 +50,10 @@ public class ToggleOverlay {
     @SubscribeEvent
     public static void onScreenMouseClick(ScreenEvent.MouseButtonPressed.Pre event) {
         Screen screen = event.getScreen();
-        if (!(screen instanceof InventoryScreen invScreen)) return;
-        if (event.getButton() != 0) return;
+        if (!(screen instanceof InventoryScreen invScreen))
+            return;
+        if (event.getButton() != 0)
+            return;
 
         int btnX = invScreen.getGuiLeft() + OFFHAND_SLOT_X + 16;
         int btnY = invScreen.getGuiTop() + OFFHAND_SLOT_Y - 5;
@@ -60,17 +63,7 @@ public class ToggleOverlay {
         if (mouseX >= btnX && mouseX <= btnX + BUTTON_WIDTH && mouseY >= btnY && mouseY <= btnY + BUTTON_HEIGHT) {
             ToggleHandler.toggle();
             NoJbPut.sendToggleSync(ToggleHandler.isEnabled());
-            
-            // 在屏幕上显示消息
-            Minecraft mc = Minecraft.getInstance();
-            if (mc.player != null) {
-                String status = ToggleHandler.isEnabled() ? "开" : "关";
-                mc.player.displayClientMessage(
-                    Component.literal("副手放置: " + status), 
-                    true
-                );
-            }
-            
+
             event.setCanceled(true);
         }
     }
