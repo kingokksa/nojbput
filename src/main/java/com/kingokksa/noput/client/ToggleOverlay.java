@@ -3,28 +3,28 @@ package com.kingokksa.noput.client;
 import com.kingokksa.noput.NoJbPut;
 import com.kingokksa.noput.util.ToggleHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
+@OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT)
 public class ToggleOverlay {
     private static final ResourceLocation ICON = ResourceLocation.fromNamespaceAndPath(NoJbPut.MODID,
             "textures/gui/switch.png");
     private static final int BUTTON_WIDTH = 4;
     private static final int BUTTON_HEIGHT = 4;
-    private static final int INVENTORY_WIDTH = 176;
-    private static final int INVENTORY_HEIGHT = 166;
     private static final int OFFHAND_SLOT_X = 77;
     private static final int OFFHAND_SLOT_Y = 65;
 
     public static void register() {
-        NeoForge.EVENT_BUS.register(ToggleOverlay.class);
+        if (net.neoforged.fml.loading.FMLEnvironment.dist == net.neoforged.api.distmarker.Dist.CLIENT) {
+            NeoForge.EVENT_BUS.register(ToggleOverlay.class);
+        }
     }
 
     @SubscribeEvent

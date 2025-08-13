@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import com.kingokksa.noput.util.ToggleHandler;
 import com.kingokksa.noput.client.ToggleOverlay;
-import com.kingokksa.noput.client.KeyInputHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,11 +15,11 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.*;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 @Mod(NoJbPut.MODID)
 public class NoJbPut {
@@ -31,8 +30,11 @@ public class NoJbPut {
     public NoJbPut(IEventBus modEventBus) {
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(NoJbPut::registerPayloads);
-        ToggleOverlay.register();
-        // KeyInputHandler会通过@EventBusSubscriber自动注册，无需手动注册
+
+        // 只在客户端环境中注册ToggleOverlay
+        if (FMLEnvironment.dist == net.neoforged.api.distmarker.Dist.CLIENT) {
+            ToggleOverlay.register();
+        }
     }
 
     public static void registerPayloads(final RegisterPayloadHandlersEvent event) {
