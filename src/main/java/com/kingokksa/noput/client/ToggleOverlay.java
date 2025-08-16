@@ -14,7 +14,7 @@ import org.lwjgl.glfw.GLFW;
 import com.kingokksa.noput.NoJbPut;
 import com.kingokksa.noput.ToggleSyncMessage;
 
-@Mod.EventBusSubscriber(modid = "nojbput", value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = NoJbPut.MODID, value = Dist.CLIENT)
 public class ToggleOverlay {
     private static final ResourceLocation ICON = new ResourceLocation("nojbput", "textures/gui/switch.png");
 

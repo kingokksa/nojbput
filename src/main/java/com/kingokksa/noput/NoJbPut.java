@@ -16,11 +16,12 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.Optional;
 
-@Mod("nojbput")
+@Mod(NoJbPut.MODID)
 public class NoJbPut {
+    public static final String MODID = "nojbput";
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation("nojbput", "toggle_sync"),
+            new ResourceLocation(MODID, "toggle_sync"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals);
