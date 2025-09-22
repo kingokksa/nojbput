@@ -1,4 +1,7 @@
 {
   "key.category.nojbput": "No JB Put",
-  "key.nojbput.toggle": "Toggle Offhand Placement"
+  "key.nojbput.toggle": "Toggle Offhand Placement",
+  "text.autoconfig.nojbput.title": "No JB Put Configuration",
+  "text.autoconfig.nojbput.option.whitelistItems": "Whitelist Items",
+  "text.autoconfig.nojbput.option.disableOffhandUsage": "Disable Offhand Usage"
 }

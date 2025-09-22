@@ -1,4 +1,7 @@
 {
   "key.category.nojbput": "No JB Put",
-  "key.nojbput.toggle": "切换副手放置"
+  "key.nojbput.toggle": "切换副手放置",
+  "text.autoconfig.nojbput.title": "No JB Put 配置",
+  "text.autoconfig.nojbput.option.whitelistItems": "白名单物品",
+  "text.autoconfig.nojbput.option.disableOffhandUsage": "禁用副手使用"
 }
