@@ -3,6 +3,7 @@ package com.kingokksa.noput.client;
 import com.kingokksa.noput.NoJbPut;
 import com.kingokksa.noput.util.ToggleHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -64,6 +65,17 @@ public class ToggleOverlay {
             ToggleHandler.toggle();
             NoJbPut.sendToggleSync(ToggleHandler.isEnabled());
 
+            event.setCanceled(true);
+        }
+        
+        // 检查是否右键点击了副手槽位，打开配置界面
+        int slotX = invScreen.getGuiLeft() + OFFHAND_SLOT_X;
+        int slotY = invScreen.getGuiTop() + OFFHAND_SLOT_Y;
+        if (event.getButton() == 1 && // 右键
+            mouseX >= slotX && mouseX <= slotX + 16 && 
+            mouseY >= slotY && mouseY <= slotY + 16) {
+            
+            Minecraft.getInstance().setScreen(new ConfigScreen(screen));
             event.setCanceled(true);
         }
     }

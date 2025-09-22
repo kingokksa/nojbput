@@ -1,4 +1,12 @@
 {
   "key.category.nojbput.nojbput": "NoJbPut",
-  "key.nojbput.toggle": "Toggle Offhand Placement Restriction"
+  "key.nojbput.toggle": "Toggle Offhand Placement Restriction",
+  "gui.nojbput.config.title": "NoJbPut Configuration",
+  "gui.nojbput.whitelist": "Whitelisted Items",
+  "gui.nojbput.add_item": "Add Item",
+  "gui.nojbput.remove_item": "Remove Item",
+  "gui.nojbput.item_input": "Enter Item ID",
+  "gui.nojbput.item_input.desc": "Format: modid:item_name (e.g. minecraft:stone)",
+  "gui.nojbput.disable_offhand": "Disable Offhand Item Usage",
+  "gui.done": "Done"
 }
