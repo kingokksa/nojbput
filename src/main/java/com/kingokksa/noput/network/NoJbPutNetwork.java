@@ -32,8 +32,13 @@ public final class NoJbPutNetwork {
     @SubscribeEvent
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(PROTOCOL_VERSION);
-        registrar.playToServer(StateSyncMessage.TYPE, StateSyncMessage.STREAM_CODEC, NoJbPutNetwork::handleFromClient);
-        registrar.playToClient(StateSyncMessage.TYPE, StateSyncMessage.STREAM_CODEC, NoJbPutNetwork::handleFromServer);
+        // 一个 payload Type 在每个 ConnectionProtocol 上只能注册一次。
+        // 拆成 playToServer + playToClient 两次调用会抛
+        // "Cannot register payload nojbput:state_sync as it is already registered."
+        // （NetworkRegistry.register 里对 PAYLOAD_REGISTRATIONS 做了 containsKey 检查）。
+        // 26.x 的 playBidirectional 有双 handler 重载，参数顺序是 (serverbound, clientbound)。
+        registrar.playBidirectional(StateSyncMessage.TYPE, StateSyncMessage.STREAM_CODEC,
+                NoJbPutNetwork::handleFromClient, NoJbPutNetwork::handleFromServer);
     }
 
     /** 服务端收到客户端请求：以服务端为权威保存（内部会按配置归一化），并回执。 */
