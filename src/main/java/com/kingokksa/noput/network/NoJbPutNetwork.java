@@ -9,7 +9,6 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-/** 网络通道。协议版本变更会让新旧客户端互不兼容（这是有意的）。 */
 public final class NoJbPutNetwork {
 
     private static final String PROTOCOL_VERSION = "3";
@@ -25,7 +24,6 @@ public final class NoJbPutNetwork {
     private NoJbPutNetwork() {
     }
 
-    /** 在 mod 构造期调用：只碰本 mod 自己的通道，不碰全局事件总线。 */
     public static synchronized void register() {
         if (initialized) {
             return;
