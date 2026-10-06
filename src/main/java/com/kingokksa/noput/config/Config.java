@@ -44,7 +44,7 @@ public final class Config {
                         "true: 玩家可以在【绿 / 黄(只拦使用) / 红】之间循环。",
                         "false: every state that blocks usage becomes unreachable, so yellow never appears.",
                         "false: 所有含「拦使用」的状态都不可达，循环里不会出现黄色。")
-                .define("disableOffhandUsage", false);
+                .define("disableOffhandUsage", true);
 
         BUILDER.comment("Main-hand list: decides whether offhand actions are intercepted, based on the item held in the main hand.",
                 "主手名单：根据主手拿着的物品决定是否拦截副手操作。")
@@ -68,10 +68,10 @@ public final class Config {
                         "  create:*             整个模组",
                         "  #minecraft:logs      item tag, matches every item in that tag",
                         "  #minecraft:logs      物品标签，含所有继承该标签的物品",
-                        "The default is equivalent to the old whitelistItems: holding a torch or lantern in the main hand allows offhand block placement.",
-                        "默认值等价于旧版的 whitelistItems：主手拿着火把/灯笼时允许副手放置方块。")
+                        "Empty by default, so nothing is exempted out of the box.",
+                        "默认为空，开箱即用时不豁免任何物品。")
                 .defineListAllowEmpty(List.of("items"),
-                        () -> List.of("minecraft:torch", "minecraft:redstone_torch", "minecraft:lantern", "minecraft:soul_lantern"),
+                        () -> Collections.<String>emptyList(),
                         () -> "minecraft:torch",
                         obj -> obj instanceof String);
         BUILDER.pop();
