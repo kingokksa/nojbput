@@ -13,7 +13,6 @@ import net.neoforged.neoforge.client.settings.KeyConflictContext;
 
 import org.lwjgl.glfw.GLFW;
 
-/** 快捷键注册（mod 总线）。 */
 @EventBusSubscriber(modid = NoJbPut.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class KeyBindings {
 
@@ -32,7 +31,6 @@ public final class KeyBindings {
         event.register(toggleKey);
     }
 
-    /** 未注册时返回 null，调用方需要判空。 */
     public static KeyMapping toggleKey() {
         return toggleKey;
     }

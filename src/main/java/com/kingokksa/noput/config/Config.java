@@ -5,31 +5,19 @@ import java.util.List;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-/**
- * No JB Put 的服务端权威配置（COMMON）。
- *
- * <p>COMMON 配置在客户端与服务端都会加载；客户端只用来渲染按钮 / 提示，真正的拦截判定在服务端执行。
- */
 public final class Config {
 
     public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
     public static final ModConfigSpec SPEC;
 
-    /** 全局总开关：关掉后本 mod 完全不做任何拦截。 */
     public static final ModConfigSpec.BooleanValue MASTER_SWITCH;
-    /** 禁用副手放置方块（副手拿着 BlockItem 右键放置）。 */
     public static final ModConfigSpec.BooleanValue DISABLE_OFFHAND_PLACEMENT;
-    /** 禁用副手使用物品（副手右键使用）。 */
     public static final ModConfigSpec.BooleanValue DISABLE_OFFHAND_USAGE;
 
-    /** 主手名单模式。 */
     public static final ModConfigSpec.EnumValue<ListMode> MAIN_HAND_LIST_MODE;
-    /** 主手名单（格式 {@code modid:item_name}）。 */
     public static final ModConfigSpec.ConfigValue<List<? extends String>> MAIN_HAND_ITEMS;
 
-    /** 副手名单模式。 */
     public static final ModConfigSpec.EnumValue<ListMode> OFF_HAND_LIST_MODE;
-    /** 副手名单（格式 {@code modid:item_name}）。 */
     public static final ModConfigSpec.ConfigValue<List<? extends String>> OFF_HAND_ITEMS;
 
     static {
@@ -112,8 +100,6 @@ public final class Config {
 
     private Config() {
     }
-
-    // --- 容错读取：配置未加载时回退到默认值（配置加载前就有代码路径会读） ---
 
     public static boolean masterSwitch() {
         return get(MASTER_SWITCH, true);
