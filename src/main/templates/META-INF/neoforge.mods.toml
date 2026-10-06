@@ -36,12 +36,10 @@ iconFile="logo.png" #optional
 #credits="" #optional
 
 # The authors of the mod, displayed in the mod UI (optional)
-authors="kingokksa"
+authors="${mod_authors}"
 
 # The description text for the mod (multi line!) (#mandatory)
-description='''
-A switchable offhand interception mod: block offhand block placement / offhand item usage, with per-hand whitelist/blacklist filters, master switch, keybind and an in-inventory toggle button.
-'''
+description='''${mod_description}'''
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.${mod_id}]] #optional
