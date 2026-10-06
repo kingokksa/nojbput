@@ -4,6 +4,7 @@
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/**/build/
+
 ### IntelliJ IDEA ###
 .idea/
 *.iws
@@ -12,15 +13,13 @@ build/
 out/
 !**/src/**/out/
 
-.run/
-
 ### Eclipse ###
 .apt_generated
 .classpath
 .eclipse/
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
 .sts4-cache
 bin/
@@ -28,6 +27,8 @@ bin/
 
 ### VS Code ###
 .vscode/
+
+### 编辑器本地历史（VSCode Local History / IDEA Local History）###
 .history/
 
 ### Mac OS ###
@@ -35,11 +36,15 @@ bin/
 
 ### Minecraft Modding ###
 run/
+runs/
 run-data/
 !**/src/**/run/
 **/src/generated/**/.cache/
 repo/
 !**/src/**/repo/
 
-### 本地构建包装脚本（内含本机绝对路径）###
+### 本地构建包装脚本（内含本机绝对路径，不入库）###
 build.sh
+
+### Forge MDK 残留 ###
+forge*changelog.txt
