@@ -5,31 +5,19 @@ import java.util.List;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-/**
- * No JB Put 的服务端权威配置（COMMON）。
- *
- * <p>COMMON 配置在客户端与服务端都会加载，客户端只用来渲染按钮 / 提示，真正的拦截判定在服务端执行。
- */
 public final class Config {
 
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
-    /** 全局总开关：关掉后本 mod 完全不做任何拦截，背包徽标也会隐藏。 */
     public static final ForgeConfigSpec.BooleanValue MASTER_SWITCH;
-    /** 是否允许本 mod 拦截副手放置方块（false 时玩家的循环里不会出现蓝色/红色）。 */
     public static final ForgeConfigSpec.BooleanValue DISABLE_OFFHAND_PLACEMENT;
-    /** 是否允许本 mod 拦截副手使用物品（false 时玩家的循环里不会出现黄色/红色）。 */
     public static final ForgeConfigSpec.BooleanValue DISABLE_OFFHAND_USAGE;
 
-    /** 主手名单模式。 */
     public static final ForgeConfigSpec.EnumValue<ListMode> MAIN_HAND_LIST_MODE;
-    /** 主手名单（格式 {@code modid:item_name}）。 */
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> MAIN_HAND_ITEMS;
 
-    /** 副手名单模式。 */
     public static final ForgeConfigSpec.EnumValue<ListMode> OFF_HAND_LIST_MODE;
-    /** 副手名单（格式 {@code modid:item_name}）。 */
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> OFF_HAND_ITEMS;
 
     static {
@@ -112,8 +100,6 @@ public final class Config {
 
     private Config() {
     }
-
-    // --- 容错读取：配置未加载时回退到默认值（配置加载前就有代码路径会读） ---
 
     public static boolean masterSwitch() {
         return get(MASTER_SWITCH, true);

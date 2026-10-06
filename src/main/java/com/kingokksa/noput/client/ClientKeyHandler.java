@@ -8,7 +8,6 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-/** 每 tick 消费一次快捷键点击（游戏总线）。 */
 @Mod.EventBusSubscriber(modid = NoJbPut.MODID, value = Dist.CLIENT)
 public final class ClientKeyHandler {
 

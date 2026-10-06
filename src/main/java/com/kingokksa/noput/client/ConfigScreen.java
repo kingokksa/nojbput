@@ -16,21 +16,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 import org.lwjgl.glfw.GLFW;
 
-/**
- * 手写的原版风格配置界面。
- *
- * <p>只有 Forge 1.20.1 / 1.16.5 用它；NeoForge 三个版本用官方自带的
- * {@code ConfigurationScreen}（见各版本 {@code ClientSetup}）。
- *
- * <p>面板画法照抄原版：1px 近黑外框 + 2px 白色高光（上/左）+ 2px {@code #555555} 阴影（下/右）
- * + 平色底 {@code #C6C6C6}，文字 {@code #404040} 不带投影。所有可点控件都用真正的原版
- * {@link Button}（自带 widget/button 贴图与 hover/按下效果），不自己造视觉效果。
- *
- * <p>任何改动都会立刻写回 {@link Config} 并 {@code SPEC.save()} 落盘，所以直接关掉界面也不会丢。
- */
 public class ConfigScreen extends Screen {
-
-    // ---------------------------------------------------------------- 布局常量
 
     private static final int PANEL_W = 320;
     private static final int PANEL_H = 224;
@@ -56,8 +42,6 @@ public class ConfigScreen extends Screen {
     private static final int INPUT_W = 100;
     private static final int ADD_W = 38;
 
-    // ---------------------------------------------------------------- 原版配色
-
     private static final int COLOR_BORDER = 0xFF000000;
     private static final int COLOR_HIGHLIGHT = 0xFFFFFFFF;
     private static final int COLOR_SHADOW = 0xFF555555;
@@ -65,8 +49,6 @@ public class ConfigScreen extends Screen {
     private static final int COLOR_TEXT = 0xFF404040;
     private static final int COLOR_LIST_BG = 0xFF9C9C9C;
     private static final int COLOR_REMOVE = 0xFF9B1B1B;
-
-    // ---------------------------------------------------------------- 状态
 
     private final Screen parent;
 
@@ -98,8 +80,6 @@ public class ConfigScreen extends Screen {
         this.mainItems.addAll(Config.mainHandItems());
         this.offItems.addAll(Config.offHandItems());
     }
-
-    // ---------------------------------------------------------------- 构建控件
 
     @Override
     protected void init() {
@@ -158,8 +138,6 @@ public class ConfigScreen extends Screen {
                 new TranslationTextComponent("gui.nojbput.config.done"), b -> onClose()));
     }
 
-    // ---------------------------------------------------------------- 渲染
-
     @Override
     public void render(MatrixStack matrix, int mouseX, int mouseY, float partialTick) {
         renderBackground(matrix);
@@ -172,7 +150,6 @@ public class ConfigScreen extends Screen {
         text(matrix, header("gui.nojbput.config.mainHand", mainItems.size()), left + COL1_X, top + HEADER_Y);
         text(matrix, header("gui.nojbput.config.offHand", offItems.size()), left + COL2_X, top + HEADER_Y);
 
-        // 输入框上悬停显示名单语法（面板里没地方放说明文字）
         if (overInput(mouseX, mouseY)) {
             renderTooltip(matrix, new TranslationTextComponent("gui.nojbput.config.syntax"), mouseX, mouseY);
         }
@@ -216,7 +193,6 @@ public class ConfigScreen extends Screen {
         }
     }
 
-    /** 无投影文字（原版界面里的正文都是无投影的）。 */
     private void text(MatrixStack matrix, ITextComponent value, int x, int y) {
         font.draw(matrix, value, (float) x, (float) y, COLOR_TEXT);
     }
@@ -224,8 +200,6 @@ public class ConfigScreen extends Screen {
     private void textCentered(MatrixStack matrix, ITextComponent value, int centerX, int y) {
         font.draw(matrix, value, (float) (centerX - font.width(value) / 2), (float) y, COLOR_TEXT);
     }
-
-    // ---------------------------------------------------------------- 交互
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
@@ -285,8 +259,6 @@ public class ConfigScreen extends Screen {
         }
     }
 
-    // ---------------------------------------------------------------- 内部
-
     private void addItem(boolean main) {
         TextFieldWidget box = main ? mainInput : offInput;
         List<String> items = main ? mainItems : offItems;
@@ -310,7 +282,6 @@ public class ConfigScreen extends Screen {
         apply();
     }
 
-    /** 把界面上的值写回配置并落盘。 */
     private void apply() {
         Config.MASTER_SWITCH.set(master);
         Config.DISABLE_OFFHAND_PLACEMENT.set(placement);
@@ -322,7 +293,6 @@ public class ConfigScreen extends Screen {
         try {
             Config.SPEC.save();
         } catch (RuntimeException ignored) {
-            // 配置还没加载完成时（理论上到不了这里）忽略即可，值已经在内存里生效
         }
     }
 

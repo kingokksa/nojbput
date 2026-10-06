@@ -9,14 +9,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-/**
- * 双向的拦截状态同步包（携带放置/使用两个拦截位）。
- *
- * <ul>
- *   <li>客户端 → 服务端：客户端请求切到某个状态（服务端为权威）。</li>
- *   <li>服务端 → 客户端：服务端下发归一化后的真实状态。</li>
- * </ul>
- */
 public final class StateSyncMessage {
 
     private final boolean blockPlacement;
@@ -60,9 +52,7 @@ public final class StateSyncMessage {
                 if (sender == null) {
                     return;
                 }
-                // setMode 内部会按服务端配置归一化（客户端可能送来越权的状态）
                 ModState.setMode(sender, message.mode());
-                // 回执：把服务端的权威状态发回给这个玩家
                 NoJbPutNetwork.sendToPlayer(sender, ModState.getMode(sender));
             } else {
                 ModState.setClientMode(message.mode());

@@ -14,7 +14,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import org.lwjgl.glfw.GLFW;
 
-/** 快捷键注册（mod 总线）。1.16.5 只能用 {@link ClientRegistry#registerKeyBinding} 注册。 */
 @Mod.EventBusSubscriber(modid = NoJbPut.MODID, value = Dist.CLIENT, bus = Bus.MOD)
 public final class KeyBindings {
 
@@ -34,7 +33,6 @@ public final class KeyBindings {
         ClientRegistry.registerKeyBinding(toggleKey);
     }
 
-    /** 未注册时返回 null，调用方需要判空。 */
     public static KeyBinding toggleKey() {
         return toggleKey;
     }
