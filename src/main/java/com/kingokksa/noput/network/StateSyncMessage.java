@@ -9,14 +9,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 
-/**
- * 双向的拦截状态同步包（携带放置/使用两个拦截位）。
- *
- * <ul>
- *   <li>客户端 → 服务端：请求切到某个状态（服务端为权威）。</li>
- *   <li>服务端 → 客户端：下发归一化后的真实状态。</li>
- * </ul>
- */
 public record StateSyncMessage(boolean blockPlacement, boolean blockUsage) implements CustomPacketPayload {
 
     public static final CustomPacketPayload.Type<StateSyncMessage> TYPE =

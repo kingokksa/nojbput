@@ -14,16 +14,9 @@ import net.neoforged.neoforge.client.settings.KeyConflictContext;
 
 import org.lwjgl.glfw.GLFW;
 
-/**
- * 快捷键注册（mod 总线）。
- *
- * <p>26.x 把 {@code KeyMapping} 的分类从 String 换成了 {@code KeyMapping.Category} record，
- * 分类的显示名走 {@code key.category.<namespace>.<path>} 这个 lang 键。
- */
 @EventBusSubscriber(modid = NoJbPut.MODID, value = Dist.CLIENT)
 public final class KeyBindings {
 
-    /** 分类 id：{@code nojbput:main} → lang 键 {@code key.category.nojbput.main}。 */
     public static final KeyMapping.Category KEY_CATEGORY =
             new KeyMapping.Category(Identifier.fromNamespaceAndPath(NoJbPut.MODID, "main"));
 
@@ -42,7 +35,6 @@ public final class KeyBindings {
         event.register(toggleKey);
     }
 
-    /** 未注册时返回 null，调用方需要判空。 */
     public static KeyMapping toggleKey() {
         return toggleKey;
     }

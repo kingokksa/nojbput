@@ -8,7 +8,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
-/** 每 tick 消费一次快捷键点击（游戏总线）。 */
 @EventBusSubscriber(modid = NoJbPut.MODID, value = Dist.CLIENT)
 public final class ClientKeyHandler {
 
