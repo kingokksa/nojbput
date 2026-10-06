@@ -110,7 +110,7 @@ public final class Config {
     }
 
     public static boolean disableOffhandUsage() {
-        return get(DISABLE_OFFHAND_USAGE, false);
+        return get(DISABLE_OFFHAND_USAGE, true);
     }
 
     public static ListMode mainHandListMode() {

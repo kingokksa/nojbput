@@ -42,6 +42,13 @@ public final class InterceptRules {
                 && handMatches(Config.offHandListMode(), Config.offHandItems(), offHand);
     }
 
+    public static boolean isBlockedOnBlock(ItemStack mainHand, ItemStack offHand, InterceptMode mode) {
+        if (isBlocked(Action.PLACEMENT, mainHand, offHand, mode)) {
+            return true;
+        }
+        return !(offHand.getItem() instanceof BlockItem) && isBlocked(Action.USAGE, mainHand, offHand, mode);
+    }
+
     public static boolean handMatches(ListMode mode, List<? extends String> list, ItemStack stack) {
         if (list == null || list.isEmpty()) {
             return true;

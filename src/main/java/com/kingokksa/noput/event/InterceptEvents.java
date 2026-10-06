@@ -28,8 +28,7 @@ public final class InterceptEvents {
             return;
         }
         PlayerEntity player = event.getPlayer();
-        if (InterceptRules.isBlocked(InterceptRules.Action.PLACEMENT,
-                player.getMainHandItem(), player.getOffhandItem(), modeFor(player))) {
+        if (InterceptRules.isBlockedOnBlock(player.getMainHandItem(), player.getOffhandItem(), modeFor(player))) {
             event.setCanceled(true);
         }
     }
